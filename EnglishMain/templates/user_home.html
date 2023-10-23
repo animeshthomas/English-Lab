@@ -1,0 +1,26 @@
+{%extends 'user_base.html'%}
+{% load static %}
+{% block body %}
+
+<div class="" xmlns="http://www.w3.org/1999/html">
+
+    <h4 class="heading" style="font-weight:bold">Course Category</h4>
+      <div class="row">
+      {% for x in course_cat %}
+      {% comment %} <div class="col-md-4 m-1"> {% endcomment %}
+        <div class="card p-2 m-2" style="width:300px;height:270px;">
+             <img class="card-img-top" src="{{x.image.url}}" height="180px" width="250px" >
+             <hr style="height:1px solid black ;width:100%;">
+             <div class="card-body">
+
+               <h4 class="text-center card-title " style="font-weight:bold;"><a href="course_details/{{ x.id }}" >{{ x.name }}</a></h4>
+
+             </div>
+       {% comment %} </div> {% endcomment %}
+    </div>
+       {% endfor %}
+      </div>
+    </div>
+    </div>
+
+{% endblock %}

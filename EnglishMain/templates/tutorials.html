@@ -1,0 +1,27 @@
+<html>
+<body>
+    <h4 class="heading" style="font-weight:bold">Course Category</h4>
+      <div class="row">
+
+      {% for x in course_cat %}
+
+          <h1>{{ x.title }}</h1>
+          {{ x.description }}
+        <div class="col-md-3 m-1">
+            <div class="card p-2" style="width: 300px;">
+                 <img class="card-img-top" src="{{x.image.url}}}" height="400px" width="200px" >
+                 <div class="card-body">
+
+                   <p class="text-center"><a href="course_details?{{ x.id }}" >{{ x.title }}</a></p>
+                 </div>
+           </div>
+        </div>
+       {% endfor %}
+
+
+      </div>
+    </div>
+    </div>
+
+</body>
+</html>

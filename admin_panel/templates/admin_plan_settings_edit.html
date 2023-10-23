@@ -1,0 +1,22 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %}Plan Settings Update{% endblock %}
+{% block background %}background="https://images.pexels.com/photos/6238608/pexels-photo-6238608.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" {% endblock %}
+{% block body %}
+<center>
+    <h1>Plan Settings Edit</h1>
+    <div class="container">
+     <form role="form" name="frm" action="{% url 'admin_plan_settings_edit'%}" method="post">
+        {% csrf_token %}
+         <div class="form-group">
+            <label for="plan_type">Category :</label>
+            <input class="form-control" type="text" name="plan_type" id="plan_type" value="{{plan_type}}" required>
+        </div>
+        <button type="submit" class="btn btn-info" id="bt" name="bt">Update</button>
+        <button type="reset" class="btn btn-info" id="rt" name="rt">Clear</button>
+        <input type="hidden" name="s_id" value="{{s_id}}">
+    </form>
+    </div>
+    <h3>{{msg}}</h3>
+</center>
+{% endblock %}

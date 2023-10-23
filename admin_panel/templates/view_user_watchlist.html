@@ -1,0 +1,30 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block title %}Plan Settings Details{% endblock %}
+{% block background %}background="https://images.pexels.com/photos/6238608/pexels-photo-6238608.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" {% endblock %}
+{% block body %}
+<link href="https://vjs.zencdn.net/8.0.4/video-js.css" rel="stylesheet" />
+<center>
+          <h2>User Watchlist</h2>
+          <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Course</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Timestamp</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {%for course in courses %}
+                      <tr>
+                        <th scope="row"> {{forloop.counter}}</th>
+                        <td>{{course.course.title}}</td>
+                        <td>{{course.course.cat}}</td>
+                        <td>{{course.timestamp}}</td>
+                      </tr>
+                      {%endfor%}
+                    </tbody>
+                  </table>
+</center>
+{% endblock %}

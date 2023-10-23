@@ -1,0 +1,51 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block title %}Hello Admin{% endblock %}
+
+{% block css %}{% endblock%}
+
+{% block body %}
+
+{%for x in details %}
+<div class="container" >
+
+<div class="row">
+    <div class="col-md-6" style="
+  width: 352px;
+  height: 387px;
+border-radius: 13px;">
+          {% if x.photo %}
+                <img src="{{x.photo.url}}" alt="Profile" class="rounded-circle" width="150px" height="150px">
+          {% endif %}
+            <br>
+            <h3 class="mt-4" style="text-transform: capitalize;">{{ x.first_name }}&nbsp;{{ x.last_name }}
+            </h3>
+       <hr style="width:200px;height:1px solid grey;">
+        <p class="mt-5 " style="font-weight:bold">About</p>
+        <table  class="p-5" style="">
+          <tr>
+            <td>Name </td>
+            <td style="text-transform: capitalize;">: {{ x.first_name }}&nbsp;{{ x.last_name }}</td>
+          </tr>
+
+          <tr>
+            <td>Reg No </td>
+            <td>: {{ x.reg_no }}</td>
+          </tr>
+
+          <tr>
+            <td>Phone </td>
+            <td>: {{ x.phone }}</td>
+          </tr>
+
+
+        </table>
+         <a href="admin_profile_edit?id={{ x.id }}">
+        <button type="button" class="btn btn-secondary mt-3">Edit Profile</button></a>
+        </div>
+
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

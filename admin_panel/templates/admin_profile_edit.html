@@ -1,0 +1,110 @@
+{%extends 'admin_base.html'%}
+{% load static %}
+{% block body %}
+
+
+
+{%for x in details %}
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+<h4  class="mt-5" style="font-weight:bold">Update Profile</h4>
+<table class="table table-hover">
+  <tbody>
+    <tr>
+
+      <tr>
+      <td>
+     <img src="{{x.photo.url}}" alt="Profile" class="rounded-circle" width="100px" height="100px">
+
+      <td>Change profile pic <input type="file" name="photo" id="" ></td>
+      </td>
+    </tr>
+
+
+      <td> First Name</td>
+      <td><input class="form-control" style="width:500px;" type="text" value=" {{ x.first_name }}"
+                  onkeypress="return allowOnlyLetters(event,this);" style="text-transform: capitalize;"
+                 name="fname" ></td>
+    </tr>
+
+    <tr>
+
+      <td> Last Name</td>
+      <td><input class="form-control" style="width:500px;" type="text" value=" {{ x.last_name }}"
+                  onkeypress="return allowOnlyLetters(event,this);"style="text-transform: capitalize;"
+                 name="lname" ></td>
+    </tr>
+
+    <tr>
+
+      <td> Reg No</td>
+      <td><input class="form-control" style="width:500px;" type="text" value=" {{ x.reg_no }}" name="reg_no" minlength="8"
+      maxlength="8" ></td>
+    </tr>
+
+    <tr>
+
+      <td> Phone</td>
+      <td><input class="form-control" style="width:500px;" type="text" value=" {{ x.phone }}" name="phone" minlength="10"
+      maxlength="10" onkeypress="return isNumberKey(event,this)"></td>
+    </tr>
+
+
+
+  </tbody>
+
+</table>
+
+
+    <div >
+    <input class=" btn btn-success" style="width:100px;" type="submit" value="update">
+      <input type="hidden" name="id" value="{{ x.id }}">
+  </div>
+</form>
+
+{% endfor %}
+
+
+<script language="Javascript" type="text/javascript">
+
+function allowOnlyLetters(e, t)
+{
+   if (window.event)
+   {
+      var charCode = window.event.keyCode;
+   }
+   else if (e)
+   {
+      var charCode = e.which;
+   }
+   else { return true; }
+   if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+       return true;
+   else
+   {
+      alert("Please enter only alphabets");
+      return false;
+   }
+}
+</script>
+
+<script type="text/javascript">
+
+        function isNumberKey(evt, obj) {
+
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            var value = obj.value;
+            var dotcontains = value.indexOf(".") != -1;
+            if (dotcontains)
+                if (charCode == 46) return false;
+            if (charCode == 46) return true;
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+
+
+
+</script>
+
+{% endblock %}

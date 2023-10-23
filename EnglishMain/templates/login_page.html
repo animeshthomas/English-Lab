@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login </title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{%static './signup_form/css/style.css '%}">
+</head>
+<body>
+
+    <div class="main">
+
+        <!-- Sign up form -->
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Login</h2>
+                        <form method="POST" class="register-form" id="register-form">
+                        {% csrf_token %}
+                            <div class="form-group">
+                                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="email" name="user_name" id="name" placeholder="E-mail"
+                                      required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="password" name="password"  id="" placeholder="password"
+                                    required/>
+                                <span style="color:red;">{{ msg1 }}</span>
+                            </div>
+
+                            <div class="form-group form-button">
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Login"/>
+								 <a href="signup"  ><input type="button" id="signup"  class="form-submit " value="Register"/></a>
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <div class="signup-image">
+                        <figure><img src="{%static './signup_form/images/bg.jpg'%}" alt="sing up image"></figure>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<script language="Javascript" type="text/javascript">
+
+function allowOnlyLetters(e, t)
+{
+   if (window.event)
+   {
+      var charCode = window.event.keyCode;
+   }
+   else if (e)
+   {
+      var charCode = e.which;
+   }
+   else { return true; }
+   if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+       return true;
+   else
+   {
+      alert("Please enter only alphabets");
+      return false;
+   }
+}
+</script>
+
+<script type="text/javascript">
+
+        function isNumberKey(evt, obj) {
+
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            var value = obj.value;
+            var dotcontains = value.indexOf(".") != -1;
+            if (dotcontains)
+                if (charCode == 46) return false;
+            if (charCode == 46) return true;
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+
+
+
+</script>
+
+    <!-- JS -->
+ <script src="{%static './signup_form/vendor/jquery/jquery.min.js'%}"></script>
+ <script src="{%static './signup_form/js/main.js'%}"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

@@ -1,0 +1,30 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block title %}Plan Settings Add{% endblock %}
+{% block background %}background="https://images.pexels.com/photos/6238608/pexels-photo-6238608.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" {% endblock %}
+{% block body %}
+<center>
+  
+    <h1>Category Add</h1>
+     <div class="container">
+         <form role="form" name="frm" action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="plan_type">Title :</label>
+            <input class="form-control" type="text" name="title" id="plan_type" value="" required>
+
+            <label for="plan_type">Description :</label>
+            <input class="form-control" type="text" name="description" id="plan_type" value="" required>
+            <label for="plan_type">Video :</label>
+            <input class="form-control" type="File" name="video" id="plan_type" value="" required>
+            <label for="plan_type">Thumbnail Image :</label>
+
+            <input class="form-control" type="File" name="image" id="plan_type" value="" required>
+        </div>
+       <button type="submit" class="btn btn-info" id="bt" name="bt">Add</button>
+        <button type="reset" class="btn btn-info" id="rt" name="rt">Clear</button>
+    </form>
+     </div>
+    <h3>{{msg}}</h3>
+</center>
+{% endblock %}

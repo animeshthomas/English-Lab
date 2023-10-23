@@ -1,0 +1,194 @@
+{%extends 'user_base.html'%}
+{% load static %}
+{% block body %}
+<link href="//vjs.zencdn.net/7.14.3/video-js.min.css" rel="stylesheet" />
+
+<div class="">
+
+    <h4 class="heading" style="font-weight:bold;text-transform: capitalize;">{% for x in cate_name %} {{ x.cat }}{% endfor %} &nbsp;Courses</h4>
+      <div class="row">
+
+{% for x in course_detail %}
+<div class="card m-2" style="width:280px;height:350px;">
+  <video
+  id="my-video-{{ x.id }}"
+  class="video-js"
+  controls
+  preload="auto"
+  width="260"
+  height="280"
+  poster="{{x.thumbnail.url}}"
+  data-setup='{"autoplay": false}'
+>
+  <source src="{{x.video.url}}"  type="video/mp4" />
+
+  <!-- Custom play button -->
+  <button id="play-button" class="custom-button">
+    Play
+  </button>
+
+  <!-- Custom pause button -->
+  <button id="pause-button" class="custom-button">
+    Pause
+  </button>
+</video>
+
+<script>
+  var video = videojs('my-video-{{ x.id }}'); // initialize the video player
+
+  // Add event listener to play button
+  document.getElementById('play-button').addEventListener('click', function() {
+    video.play();
+    console.log("clicked");
+    $.ajax({
+      url: '/mark_video_viewed',
+      type: 'POST',
+      data: { video_id: '{{ x.id }}' }, // send the video ID as data
+      success: function(response) {
+        console.log(response); // handle the AJAX response
+      },
+      error: function(xhr, status, error) {
+        console.log(error); // handle AJAX errors
+      }
+    });
+
+  });
+
+  // Add event listener to pause button
+  document.getElementById('pause-button').addEventListener('click', function() {
+    video.pause();
+  });
+</script>
+
+  <div class="card-body">
+    <h5 class="card-title">Title : {{ x.title }}</h5>
+    <p class="card-text">Description :{{ x.description }}</p>
+      <a href="/mark_video_viewed/{{x.id}}" class="btn btn-primary">Mark As Viewed</a>
+  </div>
+</div>
+
+<!-- <script>
+  var player = videojs('my-video'); // get the video player instance
+  var playButton = player.controlBar.playToggle; // get the play button element
+
+  playButton.on('click', function() {
+    console.log("clicked")
+    $.ajax({
+      url: '/mark_video_viewed',
+      type: 'POST',
+      data: { video_id: '{{ x.id }}' }, // send the video ID as data
+      success: function(response) {
+        console.log(response); // handle the AJAX response
+      },
+      error: function(xhr, status, error) {
+        console.log(error); // handle AJAX errors
+      }
+    });
+  });
+
+
+
+
+
+
+</script> -->
+       {% endfor %}
+
+
+
+      </div>
+    </div>
+    </div>
+
+<h2 class="mt-3">Recommended Videos</h2>
+<hr >
+<div class="row">
+
+   {% for x in related %}
+<div class="col-md-3">
+
+
+            <div class="card mt-2 p-2" style="width:280px;height:350px;">
+              <video
+              id="my-video-{{ x.id }}"
+              class="video-js"
+              controls
+              preload="auto"
+              width="260"
+              height="280"
+              poster="{{x.thumbnail.url}}"
+              data-setup='{"autoplay": false}'
+            >
+              <source src="{{x.video.url}}" type="video/mp4" />
+
+              <!-- Custom play button -->
+              <button id="play-button" class="custom-button">
+                Play
+              </button>
+
+              <!-- Custom pause button -->
+              <button id="pause-button" class="custom-button">
+                Pause
+              </button>
+            </video>
+
+
+              <div class="card-body">
+                <h5 class="card-title">Title : {{ x.title }}</h5>
+                <p class="card-text">Description :{{ x.description }}</p>
+                <a href="/mark_video_viewed/{{x.id}}" class="btn btn-primary">Mark As Viewed</a>
+              </div>
+            </div>
+              </div>
+                   {% endfor %}
+
+
+
+
+                </div>
+                </div>
+                </div>
+</div>
+
+<script>
+  var video = videojs('my-video-{{ x.id }}'); // initialize the video player
+
+  // Add event listener to play button
+  document.getElementById('play-button').addEventListener('click', function() {
+    video.play();
+    console.log("clicked");
+    $.ajax({
+      url: '/mark_video_viewed',
+      type: 'POST',
+      data: { video_id: '{{ x.id }}' }, // send the video ID as data
+      success: function(response) {
+        console.log(response); // handle the AJAX response
+      },
+      error: function(xhr, status, error) {
+        console.log(error); // handle AJAX errors
+      }
+    });
+
+  });
+
+  // Add event listener to pause button
+  document.getElementById('pause-button').addEventListener('click', function() {
+    video.pause();
+  });
+</script>
+
+<script>
+var elem = document.getElementById("myvideo");
+function openFullscreen() {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+}
+</script>
+
+    <script src="//vjs.zencdn.net/7.14.3/video.min.js"></script>
+{% endblock %}
